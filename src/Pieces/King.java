@@ -5,8 +5,18 @@ import java.util.ArrayList;
 
 public class King extends Piece{
 
+    boolean Check = false;
+
     public King(int x, int y, boolean colour) {
         super(x, y, colour);
+    }
+
+    public boolean isCheck() {
+        return Check;
+    }
+
+    public void setCheck(boolean check) {
+        Check = check;
     }
 
     @Override
@@ -26,6 +36,11 @@ public class King extends Piece{
         validMoves.add(new Point(-1,-1));
 
         return validMoves;
+    }
+
+    @Override
+    public boolean pieceInTheWay(int destinationX, int destinationY, Piece[][] board) {
+        return false;
     }
 
 

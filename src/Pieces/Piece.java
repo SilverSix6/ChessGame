@@ -47,15 +47,7 @@ public abstract class Piece {
     }
 
     public boolean validMove(int xDestination, int yDestination, Piece[][] board) {
-        int deltaX = xDestination - getX();
-        int deltaY = yDestination - getY();
-
-        //Negates the deltaX if the piece is black
-        //Basically rotates board 180 degrees
-        if(!colour){
-            deltaX = -deltaX;
-            deltaY = -deltaY;
-        }
+        Point deltaXY = getDeltaPosition(xDestination,yDestination);
 
 
         //Add more moves if there is pieces on the pawns diagonal
@@ -69,9 +61,23 @@ public abstract class Piece {
 
 
         //Is the move part of the set of possible moves for the piece and still on the board?
-        if(validMoves().contains(new Point(deltaX, deltaY)) && this.x + deltaX >= 0 && this.x + deltaX < 8 && this.y + deltaY >= 0 && this.y + deltaY < 8)
+        if(validMoves().contains(deltaXY) && this.x + deltaXY.x >= 0 && this.x + deltaXY.x < 8 && this.y + deltaXY.y >= 0 && this.y + deltaXY.y < 8)
             return true;
         return false;
+    }
+
+    public Point getDeltaPosition(int destinationX, int destinationY){
+        int deltaX = destinationX - getX();
+        int deltaY = destinationY - getY();
+
+        //Negates the deltaX if the piece is black
+        //Basically rotates board 180 degrees
+        if(!colour){
+            deltaX = -deltaX;
+            deltaY = -deltaY;
+        }
+
+        return new Point(deltaX,deltaY);
     }
 
     public ArrayList<Point> validMoves(){

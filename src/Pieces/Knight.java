@@ -25,6 +25,11 @@ public class Knight extends Piece{
     }
 
     @Override
+    public boolean pieceInTheWay(int destinationX, int destinationY, Piece[][] board) {
+        return false;
+    }
+
+    @Override
     public String toString() {
         return "Kn " + (super.colour?"W":"B");
     }
